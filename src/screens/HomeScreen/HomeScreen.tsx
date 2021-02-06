@@ -1,6 +1,6 @@
-import React from 'react';
-import HomeButton from '../../components/atom/Button/HomeButton/HomeButton';
-import colors from '../../components/tokens/colors';
+import * as React from 'react';
+import HomeButton from '@atom/Button/HomeButton/HomeButton';
+import colors from '@tokens/colors';
 import {Container, ImageTitle} from './HomeScreen.styles';
 
 const HomeScreen: React.FC = () => {

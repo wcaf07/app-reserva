@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components/native';
-import colors from '../../../tokens/colors';
+import colors from '@tokens/colors';
 
 type HomeButtonType = {
   bgColor: string;
