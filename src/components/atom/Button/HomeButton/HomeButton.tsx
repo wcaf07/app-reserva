@@ -5,6 +5,7 @@ import colors from '@tokens/colors';
 type HomeButtonType = {
   bgColor: string;
   text: string;
+  onPress?: () => void;
 };
 
 const Container = styled.TouchableOpacity`
@@ -22,7 +23,7 @@ const Text = styled.Text`
 
 const HomeButton: React.FC<HomeButtonType> = (atts) => {
   return (
-    <Container bgColor={atts.bgColor}>
+    <Container bgColor={atts.bgColor} onPress={atts.onPress}>
       <Text>{atts.text}</Text>
     </Container>
   );
