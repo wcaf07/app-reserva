@@ -1,6 +1,6 @@
 import Divider from '@atom/Divider/Divider';
 import * as React from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, Alert} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {data, dataType} from './data';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -17,6 +17,8 @@ import {
 } from './PickModelScreen.styles';
 import colors from '@tokens/colors';
 import Button from '@atom/Button/Button';
+import {useNavigation} from '@react-navigation/native';
+import {useCurrentPosition} from '@infrastructure/geolocation/geolocation';
 
 type renderType = {
   item: dataType;
@@ -29,6 +31,9 @@ const PickModelScreen: React.FC = () => {
   const [dateCheckout, setDateCheckout] = React.useState(new Date());
   const [dateType, setDateType] = React.useState('');
 
+  const navigation = useNavigation();
+  const {currentPosition, getCurrentPosition} = useCurrentPosition();
+
   const onChange = (_event, selectedDate) => {
     const date = dateType === 'p' ? datePickup : dateCheckout;
     const currentDate = selectedDate || date;
@@ -38,6 +43,42 @@ const PickModelScreen: React.FC = () => {
       ? setDatePickup(currentDate)
       : setDateCheckout(currentDate);
   };
+
+  const alertLocation = () => {
+    Alert.alert(
+      'Localização',
+      'Permita acesso à localização para retirada na agência mais próxima',
+      [
+        {
+          text: 'OK',
+          onPress: () => {
+            getCurrentPosition();
+          },
+        },
+      ],
+      {cancelable: true},
+    );
+  };
+
+  React.useEffect(() => {
+    if (currentPosition?.error || currentPosition?.errorPermission) {
+      getCurrentPosition();
+    } else if (currentPosition?.coords) {
+      Alert.alert(
+        'Retirada',
+        `Você irar retirar o carro nas posições ${currentPosition?.coords.latitude} e ${currentPosition?.coords.longitude}`,
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              navigation.navigate('Location');
+            },
+          },
+        ],
+        {cancelable: true},
+      );
+    }
+  }, [currentPosition, getCurrentPosition, navigation]);
 
   const renderItem = ({item}: renderType) => {
     return (
@@ -94,7 +135,7 @@ const PickModelScreen: React.FC = () => {
         </FormContent>
       </Content>
       <View>
-        <Button onPress={() => {}} color={colors.blueLight} text="Prosseguir" />
+        <Button onPress={() => {alertLocation()}} color={colors.blueLight} text="Prosseguir" />
       </View>
     </Container>
   );
