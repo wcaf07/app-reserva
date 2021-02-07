@@ -8,3 +8,19 @@ export type GeoConfig = {
   timeout: number;
   maximumAge?: number;
 };
+
+export type CarProps = {
+  name: string;
+  brand: string;
+  category: string;
+  dailyValue: number;
+  image: string;
+};
+
+export type UserProps = {
+  id: number;
+  cpf: string;
+  fullName: string;
+  email: string;
+  phone: string;
+};

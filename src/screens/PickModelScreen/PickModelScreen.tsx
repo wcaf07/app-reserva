@@ -2,7 +2,7 @@ import Divider from '@atom/Divider/Divider';
 import * as React from 'react';
 import {Text, View, Alert} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
-import {data, dataType} from './data';
+import {data} from './data';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   Container,
@@ -19,9 +19,12 @@ import colors from '@tokens/colors';
 import Button from '@atom/Button/Button';
 import {useNavigation} from '@react-navigation/native';
 import {useCurrentPosition} from '@infrastructure/geolocation/geolocation';
+import {CarProps} from '@tokens/types';
+import {saveBooking} from '@infrastructure/storage/storage';
+import {BookingProps} from '@/models/Booking';
 
 type renderType = {
-  item: dataType;
+  item: CarProps;
   index: number;
 };
 
@@ -30,6 +33,8 @@ const PickModelScreen: React.FC = () => {
   const [show, setShow] = React.useState(false);
   const [dateCheckout, setDateCheckout] = React.useState(new Date());
   const [dateType, setDateType] = React.useState('');
+  const [currentItem, setCurrentItem] = React.useState(0);
+  const [proceed, setProceed] = React.useState(false);
 
   const navigation = useNavigation();
   const {currentPosition, getCurrentPosition} = useCurrentPosition();
@@ -52,6 +57,7 @@ const PickModelScreen: React.FC = () => {
         {
           text: 'OK',
           onPress: () => {
+            setProceed(true);
             getCurrentPosition();
           },
         },
@@ -60,10 +66,23 @@ const PickModelScreen: React.FC = () => {
     );
   };
 
+  const saveBookingAndNavigate = React.useCallback(() => {
+    const car = data[currentItem];
+    const booking: BookingProps = {
+      id: new Date().getTime(),
+      car,
+      dateCheckout,
+      datePickup,
+    };
+    saveBooking(booking);
+    setProceed(false);
+    navigation.navigate('Details', {booking});
+  }, [currentItem, dateCheckout, datePickup, navigation]);
+
   React.useEffect(() => {
     if (currentPosition?.error || currentPosition?.errorPermission) {
       getCurrentPosition();
-    } else if (currentPosition?.coords) {
+    } else if (currentPosition?.coords && proceed) {
       Alert.alert(
         'Retirada',
         `Você irar retirar o carro nas posições ${currentPosition?.coords.latitude} e ${currentPosition?.coords.longitude}`,
@@ -71,14 +90,14 @@ const PickModelScreen: React.FC = () => {
           {
             text: 'OK',
             onPress: () => {
-              navigation.navigate('Location');
+              saveBookingAndNavigate();
             },
           },
         ],
         {cancelable: true},
       );
     }
-  }, [currentPosition, getCurrentPosition, navigation]);
+  }, [currentPosition, getCurrentPosition, proceed, saveBookingAndNavigate]);
 
   const renderItem = ({item}: renderType) => {
     return (
@@ -104,6 +123,9 @@ const PickModelScreen: React.FC = () => {
             sliderWidth={400}
             itemWidth={270}
             renderItem={renderItem}
+            onSnapToItem={(i) => {
+              setCurrentItem(i);
+            }}
           />
         </View>
         <FormContent>
@@ -135,7 +157,13 @@ const PickModelScreen: React.FC = () => {
         </FormContent>
       </Content>
       <View>
-        <Button onPress={() => {alertLocation()}} color={colors.blueLight} text="Prosseguir" />
+        <Button
+          onPress={() => {
+            alertLocation();
+          }}
+          color={colors.blueLight}
+          text="Prosseguir"
+        />
       </View>
     </Container>
   );

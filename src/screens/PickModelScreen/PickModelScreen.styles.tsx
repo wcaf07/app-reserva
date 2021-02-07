@@ -42,6 +42,7 @@ const ImageCarousel = styled.Image`
 const CarouselTitle = styled.Text`
   font-size: 20px;
   font-weight: bold;
+  color: ${colors.greenDark};
 `;
 
 const CarouselValue = styled.Text`

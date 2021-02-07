@@ -2,7 +2,7 @@ import * as React from 'react';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import PickModelScreen from './screens/PickModelScreen/PickModelScreen';
-import LocationScreen from './screens/LocationScreen/LocationScreen';
+import DetailsScreen from './screens/DetailsScreen/DetailsScreen';
 
 const Stack = createStackNavigator();
 
@@ -11,7 +11,11 @@ const MainNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="PickModel" component={PickModelScreen} />
-      <Stack.Screen name="Location" component={LocationScreen} />
+      <Stack.Screen
+        name="Details"
+        component={DetailsScreen}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

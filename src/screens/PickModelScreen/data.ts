@@ -21,11 +21,3 @@ export const data = [
     image: require('@images/compass.jpg'),
   },
 ];
-
-export type dataType = {
-  name: string;
-  brand: string;
-  category: string;
-  dailyValue: number;
-  image: string;
-};
