@@ -1,4 +1,6 @@
 import colors from '@tokens/colors';
+import {TouchableOpacity} from 'react-native';
+import * as React from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.SafeAreaView`
@@ -11,7 +13,8 @@ const CarouselContainer = styled.View`
   background-color: ${colors.white};
   border-radius: 15px;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   margin-left: 5px;
   margin-right: 5px;
   border-width: 0.2px;
@@ -37,10 +40,41 @@ const CarouselValue = styled.Text`
   color: ${colors.greenDark};
 `;
 
+const Title = styled.Text`
+  font-size: 15px;
+  margin-top: 5px;
+`;
+
+const TouchableText: React.FC<{text: string; onPress: () => void}> = (
+  props,
+) => {
+  return (
+    <TouchableOpacity
+      onPress={props.onPress}
+      style={{
+        padding: 5,
+        backgroundColor: colors.gray,
+        marginTop: 5,
+        borderRadius: 5,
+      }}>
+      <Title>{props.text}</Title>
+    </TouchableOpacity>
+  );
+};
+
+const Content = styled.View`
+  flex: 1;
+  padding-horizontal: 10px;
+`;
+
 export {
   Container,
   CarouselContainer,
   ImageCarousel,
   CarouselTitle,
   CarouselValue,
+  Title,
+  TouchableText,
+  Content,
+  ContentCarousel,
 };
