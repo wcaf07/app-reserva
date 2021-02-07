@@ -1,7 +1,7 @@
 import {BookingProps, calculateBookingValue} from '@/models/Booking';
-import {useRoute, useNavigation, RouteProp} from '@react-navigation/native';
+import {useRoute, useNavigation, RouteProp, NavigationContainer} from '@react-navigation/native';
 import * as React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, Modal, TextInput, View} from 'react-native';
 import {
   CarContainer,
   Container,
@@ -11,25 +11,41 @@ import {
   ValueText,
   ScrollContent,
   Section,
+  ErroFormText,
+  ModalContainer,
+  TextInputForm,
 } from './DetailsScreen.styles';
 import {Picker} from '@react-native-picker/picker';
 import Button from '@atom/Button/Button';
 import colors from '@/components/tokens/colors';
-import {loadUsers} from '@infrastructure/storage/storage';
+import {loadUsers, saveBooking, saveUser} from '@infrastructure/storage/storage';
 import {UserProps} from '@tokens/types';
+import {useForm, Controller} from 'react-hook-form';
 
 type ParamsList = {
   Details: {
     booking: BookingProps;
   };
 };
+
 type DetailsScreenRouteProp = RouteProp<ParamsList, 'Details'>;
 
 const DetailsScreen: React.FC = () => {
-  const [userSelected, setUserSelected] = React.useState('');
+  const [userSelectedIndex, setUserSelectedIndex] = React.useState(0);
+  const [modalVisible, setModalVisible] = React.useState(false);
   const [users, setUsers] = React.useState<UserProps[]>([]);
   const route = useRoute<DetailsScreenRouteProp>();
   const booking = route.params.booking;
+  const {control, handleSubmit, errors} = useForm();
+  const navigation = useNavigation();
+
+  const onSubmit = async (data) => {
+    let us = data;
+    us.id = new Date().getTime();
+    await saveUser(us);
+    fetchUsers();
+    setModalVisible(false);
+  };
 
   React.useEffect(() => {
     fetchUsers();
@@ -37,12 +53,112 @@ const DetailsScreen: React.FC = () => {
 
   const fetchUsers = async () => {
     const uss = await loadUsers();
+    console.log(uss);
     setUsers(uss);
   };
-  console.log(userSelected);
+
+  const updateBooking = async () => {
+    booking.client = users[userSelectedIndex];
+    await saveBooking(booking);
+    console.log(booking);
+    navigation.navigate('Home');
+  };
 
   return (
     <Container>
+      <Modal animationType="slide" visible={modalVisible}>
+        <ModalContainer>
+          <ScrollContent>
+            <Controller
+              control={control}
+              render={({onChange, onBlur, value}) => (
+                <Section>
+                  <Text>Cpf:</Text>
+                  <TextInputForm
+                    onBlur={onBlur}
+                    onChangeText={value => onChange(value)}
+                    value={value}
+                  />
+                </Section>
+              )}
+              name="cpf"
+              rules={{required: true}}
+              defaultValue=""
+            />
+            {errors.cpf && (
+              <ErroFormText>Esse campo é obrigatório.</ErroFormText>
+            )}
+
+            <Controller
+              control={control}
+              render={({onChange, onBlur, value}) => (
+                <Section>
+                  <Text>Full Name:</Text>
+                  <TextInputForm
+                    onBlur={onBlur}
+                    onChangeText={value => onChange(value)}
+                    value={value}
+                  />
+                </Section>
+              )}
+              name="fullName"
+              rules={{required: true}}
+              defaultValue=""
+            />
+            {errors.fullName && (
+              <ErroFormText>Esse campo é obrigatório.</ErroFormText>
+            )}
+
+            <Controller
+              control={control}
+              render={({onChange, onBlur, value}) => (
+                <Section>
+                  <Text>Email:</Text>
+                  <TextInputForm
+                    onBlur={onBlur}
+                    onChangeText={value => onChange(value)}
+                    value={value}
+                  />
+                </Section>
+              )}
+              name="email"
+              rules={{required: true}}
+              defaultValue=""
+            />
+            {errors.email && (
+              <ErroFormText>Esse campo é obrigatório.</ErroFormText>
+            )}
+
+            <Controller
+              control={control}
+              render={({onChange, onBlur, value}) => (
+                <Section>
+                  <Text>Phone:</Text>
+                  <TextInputForm
+                    onBlur={onBlur}
+                    onChangeText={value => onChange(value)}
+                    value={value}
+                  />
+                </Section>
+              )}
+              name="phone"
+              rules={{required: true}}
+              defaultValue=""
+            />
+            {errors.phone && (
+              <ErroFormText>Esse campo é obrigatório.</ErroFormText>
+            )}
+          </ScrollContent>
+          <View>
+            <Button
+              text="Submit"
+              color={colors.blueLight}
+              onPress={handleSubmit(onSubmit)}
+            />
+          </View>
+        </ModalContainer>
+      </Modal>
+
       <ScrollView>
         <ScrollContent>
           <CarContainer>
@@ -70,12 +186,10 @@ const DetailsScreen: React.FC = () => {
           <Section>
             <Text>Selecione o cliente:</Text>
             <Picker
-              selectedValue={userSelected}
-              onValueChange={(itemValue, itemIndex) =>
-                setUserSelected(itemValue.toString())
-              }>
-              {users.map((user) => (
-                <Picker.Item label={user.fullName} value={user.id} />
+              selectedValue={userSelectedIndex}
+              onValueChange={(_, itemIndex) => setUserSelectedIndex(itemIndex)}>
+              {users.map((user, i) => (
+                <Picker.Item key={i} label={user.fullName} value={i} />
               ))}
             </Picker>
           </Section>
@@ -84,10 +198,18 @@ const DetailsScreen: React.FC = () => {
       <Button
         color={colors.gray}
         text="Cadastrar novo cliente"
-        onPress={() => {}}
+        onPress={() => {
+          setModalVisible(true);
+        }}
       />
-      {userSelected.toString().length > 0 && (
-        <Button color={colors.blueLight} text="Finalizar" onPress={() => {}} />
+      {users.length > 0 && (
+        <Button
+          color={colors.blueLight}
+          text="Finalizar"
+          onPress={() => {
+            updateBooking();
+          }}
+        />
       )}
     </Container>
   );
