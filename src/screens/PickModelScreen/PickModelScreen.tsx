@@ -11,9 +11,12 @@ import {
   CarouselTitle,
   CarouselValue,
   TouchableText,
-  Content,
+  FormContent,
   Title,
+  Content,
 } from './PickModelScreen.styles';
+import colors from '@tokens/colors';
+import Button from '@atom/Button/Button';
 
 type renderType = {
   item: dataType;
@@ -52,42 +55,47 @@ const PickModelScreen: React.FC = () => {
 
   return (
     <Container>
-      <View>
-        <Carousel
-          layout="default"
-          data={data}
-          sliderWidth={400}
-          itemWidth={270}
-          renderItem={renderItem}
-        />
-      </View>
       <Content>
-        <Title>Retirada :</Title>
-        <TouchableText
-          text={datePickup.toDateString()}
-          onPress={() => {
-            setShow(true);
-            setDateType('p');
-          }}
-        />
-        <Title>Devolução :</Title>
-        <TouchableText
-          text={dateCheckout.toDateString()}
-          onPress={() => {
-            setShow(true);
-            setDateType('c');
-          }}
-        />
-
-        {show && (
-          <DateTimePicker
-            value={datePickup}
-            mode="date"
-            display="spinner"
-            onChange={onChange}
+        <View>
+          <Carousel
+            layout="default"
+            data={data}
+            sliderWidth={400}
+            itemWidth={270}
+            renderItem={renderItem}
           />
-        )}
+        </View>
+        <FormContent>
+          <Title color={colors.black}>Retirada :</Title>
+          <TouchableText
+            text={datePickup.toDateString()}
+            onPress={() => {
+              setShow(true);
+              setDateType('p');
+            }}
+          />
+          <Title color={colors.black}>Devolução :</Title>
+          <TouchableText
+            text={dateCheckout.toDateString()}
+            onPress={() => {
+              setShow(true);
+              setDateType('c');
+            }}
+          />
+
+          {show && (
+            <DateTimePicker
+              value={datePickup}
+              mode="date"
+              display="spinner"
+              onChange={onChange}
+            />
+          )}
+        </FormContent>
       </Content>
+      <View>
+        <Button onPress={() => {}} color={colors.blueLight} text="Prosseguir" />
+      </View>
     </Container>
   );
 };

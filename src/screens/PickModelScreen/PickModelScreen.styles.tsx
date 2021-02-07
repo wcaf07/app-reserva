@@ -6,6 +6,16 @@ import styled from 'styled-components/native';
 const Container = styled.SafeAreaView`
   flex: 1;
   background-color: ${colors.white};
+  align-items: stretch;
+`;
+
+const FormContent = styled.View`
+  flex: 1;
+  padding-horizontal: 10px;
+`;
+
+const Content = styled.View`
+  flex: 1;
   justify-content: center;
 `;
 
@@ -43,6 +53,7 @@ const CarouselValue = styled.Text`
 const Title = styled.Text`
   font-size: 15px;
   margin-top: 5px;
+  color: ${(props) => (props.color ? props.color : colors.white)};
 `;
 
 const TouchableText: React.FC<{text: string; onPress: () => void}> = (
@@ -53,7 +64,7 @@ const TouchableText: React.FC<{text: string; onPress: () => void}> = (
       onPress={props.onPress}
       style={{
         padding: 5,
-        backgroundColor: colors.gray,
+        backgroundColor: colors.greenDark,
         marginTop: 5,
         borderRadius: 5,
       }}>
@@ -61,11 +72,6 @@ const TouchableText: React.FC<{text: string; onPress: () => void}> = (
     </TouchableOpacity>
   );
 };
-
-const Content = styled.View`
-  flex: 1;
-  padding-horizontal: 10px;
-`;
 
 export {
   Container,
@@ -75,6 +81,6 @@ export {
   CarouselValue,
   Title,
   TouchableText,
+  FormContent,
   Content,
-  ContentCarousel,
 };
