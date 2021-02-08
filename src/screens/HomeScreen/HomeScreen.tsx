@@ -15,7 +15,11 @@ const HomeScreen: React.FC = () => {
         text="Nova reserva"
         onPress={() => navigation.navigate('PickModel')}
       />
-      <HomeButton bgColor={colors.greenLight} text="Minhas reservas" />
+      <HomeButton
+        bgColor={colors.greenLight}
+        text="Minhas reservas"
+        onPress={() => navigation.navigate('MyReservations')}
+      />
     </Container>
   );
 };

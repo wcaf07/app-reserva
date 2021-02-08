@@ -3,6 +3,7 @@ import HomeScreen from './screens/HomeScreen/HomeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import PickModelScreen from './screens/PickModelScreen/PickModelScreen';
 import DetailsScreen from './screens/DetailsScreen/DetailsScreen';
+import MyReservationsScreen from './screens/MyReservationsScreen/MyReservationsScreen';
 
 const Stack = createStackNavigator();
 
@@ -16,6 +17,7 @@ const MainNavigator = () => {
         component={DetailsScreen}
         options={{headerShown: false}}
       />
+      <Stack.Screen name="MyReservations" component={MyReservationsScreen} />
     </Stack.Navigator>
   );
 };

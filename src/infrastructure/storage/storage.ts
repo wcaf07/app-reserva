@@ -18,13 +18,21 @@ const saveBooking = async (booking: BookingProps) => {
   }
 };
 
-const loadBookings = async (): Promise<BookingProps[] | null> => {
+const loadBookings = async (): Promise<BookingProps[]> => {
   const bookingsString = await AsyncStorage.getItem('@bookings');
   if (bookingsString !== null) {
     const bookings = JSON.parse(bookingsString);
-    return bookings;
+    return adjustDate(bookings);
   }
-  return null;
+  return [];
+};
+
+const adjustDate = (bookings: BookingProps[]): BookingProps[] => {
+  bookings.forEach((item) => {
+    item.dateCheckout = new Date(item.dateCheckout);
+    item.datePickup = new Date(item.datePickup);
+  });
+  return bookings;
 };
 
 const saveUser = async (user: UserProps) => {

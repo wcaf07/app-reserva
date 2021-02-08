@@ -76,7 +76,7 @@ const PickModelScreen: React.FC = () => {
     };
     saveBooking(booking);
     setProceed(false);
-    navigation.navigate('Details', {booking});
+    navigation.navigate('Details', {booking, actions: true});
   }, [currentItem, dateCheckout, datePickup, navigation]);
 
   React.useEffect(() => {

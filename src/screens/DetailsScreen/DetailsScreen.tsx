@@ -1,7 +1,7 @@
 import {BookingProps, calculateBookingValue} from '@/models/Booking';
-import {useRoute, useNavigation, RouteProp, NavigationContainer} from '@react-navigation/native';
+import {useRoute, useNavigation, RouteProp} from '@react-navigation/native';
 import * as React from 'react';
-import {ScrollView, Modal, TextInput, View} from 'react-native';
+import {ScrollView, Modal, View} from 'react-native';
 import {
   CarContainer,
   Container,
@@ -18,13 +18,18 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import Button from '@atom/Button/Button';
 import colors from '@/components/tokens/colors';
-import {loadUsers, saveBooking, saveUser} from '@infrastructure/storage/storage';
+import {
+  loadUsers,
+  saveBooking,
+  saveUser,
+} from '@infrastructure/storage/storage';
 import {UserProps} from '@tokens/types';
 import {useForm, Controller} from 'react-hook-form';
 
 type ParamsList = {
   Details: {
     booking: BookingProps;
+    actions: boolean;
   };
 };
 
@@ -36,6 +41,7 @@ const DetailsScreen: React.FC = () => {
   const [users, setUsers] = React.useState<UserProps[]>([]);
   const route = useRoute<DetailsScreenRouteProp>();
   const booking = route.params.booking;
+  const actions = route.params.actions;
   const {control, handleSubmit, errors} = useForm();
   const navigation = useNavigation();
 
@@ -183,33 +189,46 @@ const DetailsScreen: React.FC = () => {
               </ValueText>
             </Text>
           </Section>
-          <Section>
-            <Text>Selecione o cliente:</Text>
-            <Picker
-              selectedValue={userSelectedIndex}
-              onValueChange={(_, itemIndex) => setUserSelectedIndex(itemIndex)}>
-              {users.map((user, i) => (
-                <Picker.Item key={i} label={user.fullName} value={i} />
-              ))}
-            </Picker>
-          </Section>
+          {actions ? (
+            <Section>
+              <Text>Selecione o cliente:</Text>
+              <Picker
+                selectedValue={userSelectedIndex}
+                onValueChange={(_, itemIndex) => setUserSelectedIndex(itemIndex)}>
+                {users.map((user, i) => (
+                  <Picker.Item key={i} label={user.fullName} value={i} />
+                ))}
+              </Picker>
+            </Section>
+          ) : (
+            <Section>
+              <Text>Cliente</Text>
+              <Text>Nome: {booking.client?.fullName}</Text>
+              <Text>Email: {booking.client?.email}</Text>
+              <Text>Telefone: {booking.client?.phone}</Text>
+            </Section>
+          )}
         </ScrollContent>
       </ScrollView>
-      <Button
-        color={colors.gray}
-        text="Cadastrar novo cliente"
-        onPress={() => {
-          setModalVisible(true);
-        }}
-      />
-      {users.length > 0 && (
-        <Button
-          color={colors.blueLight}
-          text="Finalizar"
-          onPress={() => {
-            updateBooking();
-          }}
-        />
+      {actions && (
+        <>
+          <Button
+            color={colors.gray}
+            text="Cadastrar novo cliente"
+            onPress={() => {
+              setModalVisible(true);
+            }}
+          />
+          {users.length > 0 && (
+            <Button
+              color={colors.blueLight}
+              text="Finalizar"
+              onPress={() => {
+                updateBooking();
+              }}
+            />
+          )}
+        </>
       )}
     </Container>
   );
