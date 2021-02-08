@@ -14,6 +14,7 @@ App para projeto de reservas desenvolvido com React-Native 0.63, para android e 
 * Foi utilizado function components e react hooks na criação das screens e componentes
 * Estrutura de componentes baseada em atomic design
 * Geolocalização utilizada para capturar posição do usuário (Posteriormente utilizar reverse geocoding)
+* Foi utilizado typescript para utilizar tipos e garantir assertividade na programação javascript
 
 ## Requisitos funcionais
 
