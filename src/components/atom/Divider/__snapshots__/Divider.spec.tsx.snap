@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divider.styles THEN Divider SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#d8d8d8",
+        "height": 1,
+        "marginBottom": 5,
+        "marginTop": 5,
+        "width": "100%",
+      },
+    ]
+  }
+/>
+`;

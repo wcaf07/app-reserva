@@ -215,6 +215,7 @@ const DetailsScreen: React.FC = () => {
           <Button
             color={colors.gray}
             text="Cadastrar novo cliente"
+            testID="botao cadastrar"
             onPress={() => {
               setModalVisible(true);
             }}
@@ -223,6 +224,7 @@ const DetailsScreen: React.FC = () => {
             <Button
               color={colors.blueLight}
               text="Finalizar"
+              testID="botao finalizar"
               onPress={() => {
                 updateBooking();
               }}

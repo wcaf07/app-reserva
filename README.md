@@ -10,11 +10,13 @@ App para projeto de reservas desenvolvido com React-Native 0.63, para android e 
 ## Aspectos técinos
 
 * Projeto desenvolvido baseado em clean architecture
-* Foi utilizado jest e testing library para testes unitarios e de componentes
 * Foi utilizado function components e react hooks na criação das screens e componentes
 * Estrutura de componentes baseada em atomic design
 * Geolocalização utilizada para capturar posição do usuário (Posteriormente utilizar reverse geocoding)
 * Foi utilizado typescript para utilizar tipos e garantir assertividade na programação javascript
+* Foi utilizado jest e testing library para testes unitarios e de componentes
+  * ![img running](./src/assets/media/running.png)
+  * ![img teste](./src/assets/media/result-test.png)
 
 ## Requisitos funcionais
 

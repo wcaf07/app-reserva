@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MyReservationsScreen.styles THEN CarouselContainer SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "borderColor": "#d8d8d8",
+        "borderRadius": 15,
+        "borderWidth": 0.2,
+        "elevation": 5,
+        "marginBottom": 15,
+        "marginLeft": 5,
+        "marginRight": 5,
+        "marginTop": 15,
+        "paddingBottom": 10,
+        "paddingLeft": 10,
+        "paddingRight": 10,
+        "paddingTop": 10,
+        "shadowOpacity": 0.3,
+        "shadowRadius": 8,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN CarouselTitle SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#2d623f",
+        "fontSize": 20,
+        "fontWeight": "bold",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN CarouselValue SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#2d623f",
+        "fontWeight": "bold",
+        "marginTop": 10,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN Container SHOULD match with snapshot when is show 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Array [
+      Object {
+        "alignItems": "stretch",
+        "backgroundColor": "#ffffff",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN Content SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "justifyContent": "center",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN FormContent SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "paddingHorizontal": 10,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN ImageCarousel SHOULD match with snapshot when is show 1`] = `
+<Image
+  style={
+    Array [
+      Object {
+        "height": 120,
+        "width": 220,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN Title SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#ffffff",
+        "fontSize": 15,
+        "marginTop": 5,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`MyReservationsScreen.styles THEN TouchableText SHOULD match with snapshot when is show 1`] = `
+<View
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "backgroundColor": "#2d623f",
+      "borderRadius": 5,
+      "marginTop": 5,
+      "opacity": 1,
+      "padding": 5,
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#ffffff",
+          "fontSize": 15,
+          "marginTop": 5,
+        },
+      ]
+    }
+  />
+</View>
+`;

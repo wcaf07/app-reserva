@@ -1,4 +1,4 @@
-import { UserProps } from '@/components/tokens/types';
+import {UserProps} from '@/components/tokens/types';
 import {BookingProps} from '@/models/Booking';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

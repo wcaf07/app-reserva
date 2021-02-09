@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DetailsScreen.styles THEN CarContainer SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN Container SHOULD match with snapshot when is show 1`] = `
+<RCTSafeAreaView
+  emulateUnlessSupported={true}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#ffffff",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN ErroFormText SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#ff0000",
+        "fontSize": 15,
+        "marginTop": 5,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN ImageDetails SHOULD match with snapshot when is show 1`] = `
+<Image
+  style={
+    Array [
+      Object {
+        "height": 150,
+        "width": 280,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN ModalContainer SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "stretch",
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN ScrollContent SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "paddingBottom": 10,
+        "paddingLeft": 10,
+        "paddingRight": 10,
+        "paddingTop": 10,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN Section SHOULD match with snapshot when is show 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "marginTop": 15,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN Text SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "fontSize": 15,
+        "marginTop": 5,
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN TextInputForm SHOULD match with snapshot when is show 1`] = `
+<TextInput
+  allowFontScaling={true}
+  rejectResponderTermination={true}
+  style={
+    Object {
+      "borderColor": "gray",
+      "borderRadius": 5,
+      "borderWidth": 1,
+      "height": 40,
+    }
+  }
+  underlineColorAndroid="transparent"
+/>
+`;
+
+exports[`DetailsScreen.styles THEN Title SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#2d623f",
+        "fontSize": 20,
+        "fontWeight": "bold",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`DetailsScreen.styles THEN ValueText SHOULD match with snapshot when is show 1`] = `
+<Text
+  style={
+    Array [
+      Object {
+        "color": "#2d623f",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "marginTop": 5,
+      },
+    ]
+  }
+/>
+`;
